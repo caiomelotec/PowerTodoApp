@@ -1,5 +1,6 @@
 "use client";
 
+import { XCircleIcon } from "@heroicons/react/20/solid";
 import {
   DraggableProvidedDragHandleProps,
   DraggableProvidedDraggableProps,
@@ -23,8 +24,20 @@ export const TodoCard = ({
   dragHandleProps,
 }: Props) => {
   return (
-    <div {...draggableProps} {...dragHandleProps} ref={innerRef}>
-      <h1>Hello</h1>
+    <div
+      className="bg-white rounded-md space-y-2 drop-shadow-md"
+      {...draggableProps}
+      {...dragHandleProps}
+      ref={innerRef}
+    >
+      <div className="flex justify-between items-center p-5">
+        <p className="text-red">{todo.title}</p>
+        <button className="text-red-500 hover:text-red-600">
+          <XCircleIcon className="ml-5 h-8 w-8" />
+        </button>
+      </div>
+
+      {/* Add Img */}
     </div>
   );
 };
