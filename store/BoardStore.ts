@@ -4,18 +4,24 @@ import { create } from "zustand";
 
 interface BoardState {
   board: Board;
-  setBoardState: (board: Board) => void;
-  updateTodoInDB: (todo: Todo, columnId: TypedColumn) => void;
+  searchString: string;
 }
 
 interface BoardActions {
   getBoard: () => Promise<void>;
+  setBoardState: (board: Board) => void;
+  updateTodoInDB: (todo: Todo, columnId: TypedColumn) => void;
+  setSearchString: (searchString: string) => void;
 }
 
 export const useBoardStore = create<BoardState & BoardActions>((set) => ({
   board: {
     columns: new Map<TypedColumn, Column>(),
   },
+  searchString: "",
+
+  setSearchString: (searchString) => set({ searchString }),
+
   getBoard: async () => {
     const board = await getTodosGroupedByColumn();
     set({ board });
